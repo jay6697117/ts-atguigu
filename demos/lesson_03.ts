@@ -91,11 +91,23 @@
 // }
 // console.log('foo1() :>> ', foo1());
 
-function foo2(): void {
-  console.log('void test');
-  // return;
-  return undefined
-  // return null; // error TS2322: Type 'null' is not assignable to type 'void'
+// function foo2(): void {
+//   console.log('void test');
+//   // return;
+//   return undefined
+//   // return null; // error TS2322: Type 'null' is not assignable to type 'void'
+// }
+// const res = foo2();
+// console.log('res :>> ', res);
+
+
+/* never */
+// never 表示永远不会返回结果（连undefined都没有）[较少使用]
+// 下面的函数没有返回值（连undefined都没有），仅抛出error
+function fn2(): never {
+  throw new Error("报错啦～～～");
+  // return; // 报错: 不能将类型“undefined”分配给类型“never”
+  // return undefined; // 报错: 不能将类型“undefined”分配给类型“never”
+  // return new Error("报错啦～～～"); // 报错: 不能将类型“Error”分配给类型“never”
 }
-const res = foo2();
-console.log('res :>> ', res);
+fn2()
