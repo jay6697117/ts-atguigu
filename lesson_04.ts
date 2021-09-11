@@ -112,16 +112,25 @@
 // 断言有两种形式：
 
 // 8.1：变量 as 类型
-let someValue: unknown = 'this is a string';
+let someValue: unknown;
+someValue = false;
+someValue = 'hello';
+someValue = 'this is a string';
+
 console.log('someValue :>> ', someValue);
 let strLength: number = (someValue as string).length;
 console.log('strLength :>> ', strLength);
 let strLength1: number = (<string>someValue).length;
 console.log('strLength1 :>> ', strLength1);
-console.log('------------------------------')
+console.log('------------------------------');
 
 // 8.2：<类型>变量
-let someVal: unknown = [1, 2, 3, 4, 5];
+let someVal: unknown;
+someVal = false;
+someVal = 123;
+someVal = 'hello';
+someVal = [1, 2, 3, 4, 5];
+
 console.log('someVal :>> ', someVal);
 let strLen: number = (someVal as number[]).length;
 console.log('strLen :>> ', strLen);
