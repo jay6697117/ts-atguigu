@@ -1,4 +1,4 @@
-let a: number;
+var a;
 a = 100;
 a = 111;
 a = 112;
