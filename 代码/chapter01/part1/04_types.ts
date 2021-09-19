@@ -74,5 +74,3 @@ let l: myType;
 let m: myType;
 
 k = 2;
-
-console.log('k :>> ', k);

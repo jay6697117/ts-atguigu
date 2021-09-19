@@ -1,5 +1,5 @@
 {
 
-  "exclude": ["./demo/**/*"],
+  "exclude": ["./demos/**/*","./代码/**/*","./笔记/**/*"],
   "compilerOptions": {}
 }
