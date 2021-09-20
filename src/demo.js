@@ -1,3 +1,2 @@
-let a = 'hi';
-a = 'hello';
-// a = 123;
+let demo = 'hi';
+demo = 'hello';

@@ -1,2 +1,3 @@
-let a = 'hi';
-a = 'hello';
+"use strict";
+var demo = 'hi';
+demo = 'hello';
