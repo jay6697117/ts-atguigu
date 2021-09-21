@@ -1,4 +1,4 @@
-{
+const tsconfig = {
   // 此json文件中可以写注释
   /*
     tsconfig.json是ts编译器的配置文件，ts编译器可以根据它的信息来对代码进行编译
@@ -37,7 +37,6 @@
   */
   "compilerOptions": {
     // target 用来指定ts被编译为的ES的版本
-    // ES2015
     "target": "es5",
     // module 指定要使用的模块化的规范: 'none', 'commonjs', 'amd', 'system', 'umd', 'es6', 'es2015', ...
     "module": "commonjs",
