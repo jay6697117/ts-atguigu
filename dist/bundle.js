@@ -1,1 +1,1 @@
-(()=>{"use strict";console.log(3)})();
+(()=>{"use strict";console.log("结果: ",33),console.log("hi :>> ","你好")})();
