@@ -1528,5 +1528,9 @@
         console.log('结果: ', 33),
         console.log('hi :>> ', '你好'),
         console.log('Promise :>> ', Promise);
+      var n = function (t, n) {
+        return t + n;
+      };
+      n(111, 222), console.log('foo(111, 222) :>> ', n(111, 222));
     })();
 })();

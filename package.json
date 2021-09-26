@@ -5,7 +5,7 @@
   "license": "ISC",
   "scripts": {
     "dev": "NODE_ENV=development webpack serve --open",
-    "build": "NODE_ENV=production webpack"
+    "build": "rm -rf dist && NODE_ENV=production webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
