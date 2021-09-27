@@ -9,20 +9,13 @@ const tsconfig = {
       路径：** 表示任意目录directory
             * 表示任意文件file
   */
-  "include": [
-    "src/**/*"
-  ],
+  include: ['src/**/*'],
   /*
     "exclude" 不需要被编译的文件目录
     默认值：
       ["node_modules", "bower_components", "jspm_packages", "./dist"]
   */
-  "exclude": [
-    "node_modules/**/*",
-    "demos/**/*",
-    "代码/**/*",
-    "笔记/**/*"
-  ],
+  exclude: ['node_modules/**/*', 'demos/**/*', '代码/**/*', '笔记/**/*'],
   /*
     被继承的配置文件
     例如："extends": "。/configs/base",
@@ -35,50 +28,47 @@ const tsconfig = {
   /*
     compilerOptions 编译器的选项
   */
-  "compilerOptions": {
+  compilerOptions: {
     // target 用来指定ts被编译为的ES的版本
-    "target": "es5",
+    target: 'es5',
     // module 指定要使用的模块化的规范: 'none', 'commonjs', 'amd', 'system', 'umd', 'es6', 'es2015', ...
-    "module": "commonjs",
+    module: 'commonjs',
     // lib用来指定项目中要使用的库
     // 在node项目中可以声明用到的库，在前端中可以声明dom(浏览器中的内置库，但是在node中是不需要的！)
     // 默认就是在浏览器中的运行环境！
     //'es5', 'es6', 'es2015', 'es7', 'es2016', 'es2017', 'es2018', 'es2019', 'es2020',
     // 'esnext', 'dom', 'dom.iterable', ...
-    "lib": [
-      "ES2015",
-      "dom"
-    ],
+    lib: ['ES2015', 'dom'],
     // outDir 用来指定编译后文件所在的目录
-    "outDir": "./dist",
+    outDir: './dist',
     // ***********************************
     // 将代码合并为一个文件
     // 设置outFile后，所有的全局作用域中的代码会合并到同一个文件中
     // "outFile": "./dist/app.js"
     // ***********************************
     // 是否对js文件进行编译，默认是false
-    "allowJs": true,
+    allowJs: true,
     // 是否检查js代码是否符合语法规范，默认是false
-    "checkJs": true,
+    checkJs: true,
     // 是否移除注释
-    "removeComments": true,
+    removeComments: true,
     // 不生成编译后的文件, 仅用TS检查语法
-    "noEmit": false,
+    noEmit: false,
     // 当有错误时不生成编译后的文件
-    "noEmitOnError": true,
+    noEmitOnError: true,
     /*
       语法检查属性
     */
     // 所有严格检查的总开关
-    "strict": true,
+    strict: true,
     // 用来设置编译后的文件是否使用严格模式，默认false
     // 在ES6中的模块化(import/export)会自动使用严格模式，而无需在文件开头添加`'use strict'`
-    "alwaysStrict": true,
+    alwaysStrict: true,
     // 不允许隐式的any类型
-    "noImplicitAny": true,
+    noImplicitAny: true,
     // 不允许不明确类型的this
-    "noImplicitThis": true,
+    noImplicitThis: true,
     // 严格的检查空值
-    "strictNullChecks": true
+    strictNullChecks: true
   }
-}
+};
