@@ -42,9 +42,9 @@ module.exports = {
             options: {
               // 设置预定义的环境
               presets: [
-                // 预定义的第一个环境
+                // 第一个环境
                 [
-                  //指定环境插件
+                  // 指定环境插件
                   '@babel/preset-env',
                   // 配置信息
                   {
@@ -53,7 +53,7 @@ module.exports = {
                       chrome: '58',
                       ie: '11'
                     },
-                    //指定corejs的版本: package.json中的版本为3.8.1
+                    // 指定corejs的版本: package.json中的版本为3.8.1
                     corejs: 3,
                     // 使用corejs的方式，"usage" 表示按需加载
                     useBuiltIns: 'usage'
@@ -84,6 +84,6 @@ module.exports = {
 
 // CleanWebpackPlugin只用于生产环境
 if (process.env.NODE_ENV === 'production') {
-  console.log('CleanWebpackPlugin 啦啦啦');
+  console.log('CleanWebpackPlugin在生产环境运行了～');
   module.exports.plugins.push(new CleanWebpackPlugin());
 }

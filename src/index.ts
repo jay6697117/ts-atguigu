@@ -14,5 +14,5 @@ console.log('hi :>> ', hi);
 console.log('Promise :>> ', Promise);
 
 const foo = (x: number, y: number): number => x + y;
-foo(111, 222);
-console.log('foo(111, 222) :>> ', foo(111, 222));
+foo(11, 22);
+console.log('结果:', foo(11, 22));
