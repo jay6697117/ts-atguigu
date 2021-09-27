@@ -30,9 +30,9 @@ const tsconfig = {
   */
   compilerOptions: {
     // target 用来指定ts被编译为的ES的版本
-    target: 'es5',
+    target: 'ES2015',
     // module 指定要使用的模块化的规范: 'none', 'commonjs', 'amd', 'system', 'umd', 'es6', 'es2015', ...
-    module: 'commonjs',
+    module: 'ES2015',
     // lib用来指定项目中要使用的库
     // 在node项目中可以声明用到的库，在前端中可以声明dom(浏览器中的内置库，但是在node中是不需要的！)
     // 默认就是在浏览器中的运行环境！

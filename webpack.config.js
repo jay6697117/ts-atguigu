@@ -50,12 +50,12 @@ module.exports = {
                   {
                     // 要兼容的目标浏览器
                     targets: {
-                      chrome: '58',
+                      chrome: '54',
                       ie: '11'
                     },
                     // 指定corejs的版本: package.json中的版本为3.8.1
-                    corejs: 3,
-                    // 使用corejs的方式，"usage" 表示按需加载
+                    corejs: '3',
+                    // 使用corejs的方式，"usage":表示按需加载
                     useBuiltIns: 'usage'
                   }
                 ]
