@@ -155,3 +155,22 @@ user2.sayName();
  */
 
 // 5.类表达式
+
+
+/**
+ * 命名类表达式（Named Class Expression
+ * (规范中没有这样的术语，但是它和命名函数表达式类似)
+ */
+
+const User = class UserInner {
+  constructor(name) {
+    this.name = name;
+  }
+  sayName() {
+    console.log('User:', User);
+    console.log(`UserInner:`, UserInner); // UserInner这个变量仅在类内部可见
+  }
+};
+const user = new User('zjh');
+console.log(`user:`, user);
+user.sayName();
