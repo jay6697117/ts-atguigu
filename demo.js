@@ -19,7 +19,7 @@ class MyClass {
   // other methods...
 }
 
- */
+*/
 
 /**
  * 注解:
@@ -48,7 +48,7 @@ const user = new User('张金辉', 31);
 console.log(`user:`, user);
 user.sayHi();
 
- */
+*/
 
 /**
  * 注解:
@@ -156,21 +156,244 @@ user2.sayName();
 
 // 5.类表达式
 
-
 /**
  * 命名类表达式（Named Class Expression
  * (规范中没有这样的术语，但是它和命名函数表达式类似)
  */
+
+/*
 
 const User = class UserInner {
   constructor(name) {
     this.name = name;
   }
   sayName() {
-    console.log('User:', User);
-    console.log(`UserInner:`, UserInner); // UserInner这个变量仅在类内部可见
+    alert(`this.name: ${this.name}`);
+    console.log(`this.name:`, this.name);
+    // console.log('User:', User);
+    // console.log(`UserInner:`, UserInner); // UserInner这个变量仅在类内部可见
   }
 };
+
 const user = new User('zjh');
 console.log(`user:`, user);
 user.sayName();
+console.log(`UserInner:`, UserInner); //ReferenceError: UserInner is not defined
+
+*/
+
+/*
+
+function makeClassUser() {
+  return class { // 返回一个匿名类
+    constructor(name) {
+      this.name = name;
+    }
+    sayName() {
+      alert(`this.name: ${this.name}`);
+      console.log(`this.name:`, this.name);
+    }
+  };
+}
+
+let User = makeClassUser();
+new User('张金辉').sayName();
+
+*/
+
+// 6.Getters/setters
+
+/*
+
+const obj = { name: 'bruce' };
+console.log('----------------------------------------------------------------------');
+console.log(`obj 000:`, obj);
+const descriptor0 = Object.getOwnPropertyDescriptor(obj, 'name');
+console.log(`descriptor0:`, descriptor0);
+console.log(`JSON.stringify(descriptor0):\n`, JSON.stringify(descriptor0, null, 2));
+
+*/
+
+/*
+// 属性描述符: 默认值
+{
+  "value": "bruce",
+  "writable": true,
+  "enumerable": true,
+  "configurable": true
+}
+*/
+
+/*
+
+console.log('----------------------------------------------------------------------');
+Object.defineProperty(obj, 'anotherName', {
+  value: 'jack',
+  // 手动将三个标志的默认值false设置为true
+  writable: true,
+  enumerable: true,
+  configurable: true
+});
+console.log(`obj 001:`, obj);
+const descriptor1 = Object.getOwnPropertyDescriptor(obj, 'anotherName');
+console.log(`descriptor1:`, descriptor1);
+console.log(`JSON.stringify(descriptor1):\n`, JSON.stringify(descriptor1, null, 2));
+console.log('----------------------------------------------------------------------');
+
+*/
+
+/*
+// 属性描述符: 默认值
+{
+  "value": "jack",
+  "writable": false,
+  "enumerable": false,
+  "configurable": false
+}
+*/
+
+// 6.1 practice 1
+
+/*
+
+'use strict';
+const user = {
+  name: 'John'
+};
+
+let desc;
+desc = Object.getOwnPropertyDescriptor(user, 'name');
+console.log(`desc 000:`, desc);
+user.name = 'John1';
+
+Object.defineProperty(user, 'name', {
+  writable: false
+});
+desc = Object.getOwnPropertyDescriptor(user, 'name');
+console.log(`desc 001:`, desc);
+user.name = 'John2'; // Error: Cannot assign to read only property 'name'
+
+desc = Object.getOwnPropertyDescriptor(user, 'name');
+console.log(`desc 002:`, desc);
+
+*/
+
+// 6.2 practice 2
+
+/*
+'use strict';
+
+// const user = {
+//   name: 'lucy'
+// };
+// const desc = Object.getOwnPropertyDescriptor(user, 'name');
+// console.log(`desc:`, desc);
+
+// const temp = {name:''};
+const temp = {};
+Object.defineProperty(temp, 'name', {
+  value: 'bruce',
+  writable: true,
+  configurable: true
+});
+console.log(`temp 000:`, temp);
+const desc1 = Object.getOwnPropertyDescriptor(temp, 'name');
+console.log(`desc1:`, desc1);
+temp.name = 'lalala';
+console.log(`temp 001:`, temp);
+const desc2 = Object.getOwnPropertyDescriptor(temp, 'name');
+console.log(`desc2:`, desc2);
+
+let user = {
+  name: 'bruce',
+  toString() {
+    return this.name + '';
+  }
+};
+
+const desc = Object.getOwnPropertyDescriptor(user, 'toString');
+console.log(`desc:`, desc);
+
+Object.defineProperty(user, 'toString', {
+  enumerable: false
+});
+const desc1 = Object.getOwnPropertyDescriptor(user, 'toString');
+console.log(`desc1:`, desc1);
+
+let tempArr = [];
+for (const key in user) {
+  if (Object.hasOwnProperty.call(user, key)) {
+    const tempObj = {};
+    const element = user[key];
+    tempObj[key] = element;
+    tempArr.push(tempObj);
+  }
+}
+console.log(`tempArr:`, tempArr);
+console.log(`Object.keys(user):`, Object.keys(user));
+*/
+
+// 6.3 practice 3
+
+/*
+
+'use strict';
+// let desc = Object.getOwnPropertyDescriptor(Math, 'PI');
+// console.log(`desc:`, desc);
+// console.log(`JSON.stringify(desc, null, 2):\n`, JSON.stringify(desc, null, 2));
+// // console.log(`Math.PI`, Math.PI);
+// Object.defineProperty(Math, 'PI', {
+//   configurable: true
+// });
+// Math.PI = 123456; // 依然会报错
+
+const temp = { name: 'hehehe' };
+console.log(`temp 01:`, temp);
+console.log('-----------------------------------------------');
+const desc0 = Object.getOwnPropertyDescriptor(temp, 'name');
+console.log(`desc0:`, desc0);
+console.log(`JSON.stringify(desc0, null, 2):\n`, JSON.stringify(desc0, null, 2));
+console.log('-----------------------------------------------');
+
+Object.defineProperty(temp, 'name', {
+  configurable: false
+});
+const desc1 = Object.getOwnPropertyDescriptor(temp, 'name');
+console.log(`desc1:`, desc1);
+console.log(`JSON.stringify(desc1, null, 2):\n`, JSON.stringify(desc1, null, 2));
+console.log('-----------------------------------------------');
+
+temp.name = 'lalala';
+const desc2 = Object.getOwnPropertyDescriptor(temp, 'name');
+console.log(`desc2:`, desc2);
+console.log(`JSON.stringify(desc2, null, 2):\n`, JSON.stringify(desc2, null, 2));
+console.log('-----------------------------------------------');
+
+delete temp.name;
+console.log(`temp 02:`, temp);
+console.log('-----------------------------------------------');
+
+*/
+
+/*
+
+// 将 user.name 设置为一个“永不可改”的常量
+'use strict';
+let user = {
+  name: 'John'
+};
+const desc0 = Object.getOwnPropertyDescriptor(user, 'name');
+console.log(`desc0:`, desc0);
+Object.defineProperty(user, 'name', {
+  writable: false,
+  configurable: false
+});
+const desc1 = Object.getOwnPropertyDescriptor(user, 'name');
+console.log(`desc1:`, desc1);
+// 不能修改 user.name 或它的标志
+// 下面的所有操作都不起作用：
+user.name = 'Pete';
+delete user.name;
+Object.defineProperty(user, 'name', { value: 'Peter' });
+
+*/
