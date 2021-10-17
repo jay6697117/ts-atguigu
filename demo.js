@@ -1,3 +1,10 @@
+/*
+ * @Author: 张金辉
+ * @LastEditors: Please set LastEditors
+ * @Description: Class基本语法 和 对象属性配置
+ * @FilePath: /ts-atguigu/demo.js
+ */
+
 // 1.class 基本语法
 
 /*
@@ -396,4 +403,239 @@ user.name = 'Pete';
 delete user.name;
 Object.defineProperty(user, 'name', { value: 'Peter' });
 
+*/
+
+// 6.4 practice 4
+// 将 user.name 设置为一个“永不可改”的常量
+// 'use strict';
+// let user = {
+//   name: 'John'
+// };
+// const desc0 = Object.getOwnPropertyDescriptor(user, 'name');
+// const desc00 = Object.getOwnPropertyDescriptors(user);
+// console.log(`desc0:`, desc0);
+// console.log(`desc00:`, desc00);
+// Object.defineProperties(user, {
+//   name: {
+//     value: 'nancy',
+//     writable: false,
+//     configurable: false
+//   }
+// });
+// const desc1 = Object.getOwnPropertyDescriptor(user, 'name');
+// const desc11 = Object.getOwnPropertyDescriptors(user);
+// console.log(`desc1:`, desc1);
+// console.log(`desc11:`, desc11);
+// // 不能修改 user.name 或它的标志
+// // 下面的所有操作都不起作用：
+// user.name = 'Pete';
+// delete user.name;
+// Object.defineProperty(user, 'name', { value: 'Peter' });
+
+// 6.5 practice 5
+// 'use strict';
+// let user = {
+//   [Symbol('foo')]: 'hello symbol'
+// };
+// console.log(`user 00:`, user)
+// const descUser0 = Object.getOwnPropertyDescriptors(user);
+// console.log(`descUser0:`, descUser0);
+
+// const cloneObj = Object.defineProperties({}, Object.getOwnPropertyDescriptors(user));
+// console.log(`cloneObj 00:`, cloneObj);
+// const descClone0 = Object.getOwnPropertyDescriptors(cloneObj);
+// console.log(`descClone0:`, descClone0);
+
+// cloneObj.name = 'lucy';
+// console.log(`cloneObj 01:`, cloneObj);
+// const descClone1 = Object.getOwnPropertyDescriptors(cloneObj);
+// console.log(`descClone1:`, descClone1);
+
+// console.log(`user 01:`, user);
+// const descUser1 = Object.getOwnPropertyDescriptors(user);
+// console.log(`descUser1:`, descUser1);
+
+// 7. Object.preventExtensions()
+
+/*
+
+const temp = new Object();
+Object.preventExtensions(temp);
+console.log(`temp 000:`, temp);
+temp.name = '张金辉';
+// Object.defineProperty(temp, 'name', {
+//   value: '张金辉'
+// }); // Uncaught TypeError: Cannot define property name, object is not extensible
+console.log(`temp 001:`, temp);
+console.log(`temp.name`, temp.name);
+
+*/
+
+// 8. Object.isExtensible()
+
+/*
+
+const temp = new Object();
+console.log(`Object.isExtensible(temp) 000:`, Object.isExtensible(temp)); // true:可以为这个对象添加属性
+Object.defineProperty(temp, 'name', {
+  value: '张金辉1'
+}); // 成功
+console.log(`temp 000:`, temp);
+Object.preventExtensions(temp);
+console.log(`Object.isExtensible(temp) 001:`, Object.isExtensible(temp)); // false:不能为这个对象添加属性
+// Object.defineProperty(temp, 'name', {
+//   value: '张金辉2'
+// }); // Uncaught TypeError: Cannot define property name, object is not extensible
+temp.age = 32;
+console.log(`temp 001:`, temp);
+
+*/
+
+// 9. Object.seal()
+
+/*
+const obj = { p: 'hello' };
+const des0 = Object.getOwnPropertyDescriptor(obj, 'p'); //{value: "hello", writable: true, enumerable: true, configurable: true}
+console.log(`des0:`, des0);
+Object.seal(obj);
+Object.defineProperties(obj, {
+  p: {
+    writable: false
+  }
+});
+const desc1 = Object.getOwnPropertyDescriptor(obj, 'p'); //{value: "hello", writable: true, enumerable: true, configurable: false}
+console.log(`desc1:`, desc1);
+console.log('-------------');
+delete obj.p; // 无法删除旧属性
+console.log(`obj 删除:`, obj);
+console.log(`obj.p 删除:`, obj.p);
+console.log('-------------');
+obj.x = 'world'; // 无法添加新属性
+console.log(`obj 添加:`, obj);
+console.log(`obj.x 添加:`, obj.x);
+console.log('-------------');
+obj.p = 'football'; // 能更新属性值
+console.log(`obj 更新:`, obj);
+console.log(`obj.p 更新:`, obj.p);
+*/
+
+/*
+'use strict';
+const obj = {
+  p: 'a'
+};
+
+// seal方法之前
+const desc = Object.getOwnPropertyDescriptor(obj, 'p');
+console.log(`000:`, desc);
+// Object {
+//   value: "a",
+//   writable: true,
+//   enumerable: true,
+//   configurable: true // true
+// }
+
+// Object.defineProperty(obj, 'p', {
+//   writable: false
+// });
+Object.seal(obj);
+// Object.defineProperty(obj, 'p', {
+//   writable: false
+// });
+
+// seal方法之后
+const desc1 = Object.getOwnPropertyDescriptor(obj, 'p');
+console.log(`001:`, desc1);
+// Object {
+//   value: "a",
+//   writable: true,
+//   enumerable: true,
+//   configurable: false // false
+// }
+
+Object.defineProperty(obj, 'p', {
+  writable: false
+});
+
+// Object.defineProperty(obj, 'p', {
+//   value: 'b'
+//   // enumerable: false
+//   // configurable: true
+// });
+// TypeError: Cannot redefine property: p
+console.log(`obj:`, obj);
+const desc2 = Object.getOwnPropertyDescriptor(obj, 'p');
+console.log(`002:`, desc2);
+
+Object.defineProperty(obj, 'p', {
+  value: 'c'
+});
+*/
+
+// 10.Object.isSealed()
+
+/*
+const temp = { p: 'hello' };
+Object.seal(temp);
+console.log(`Object.isSealed(temp):`, Object.isSealed(temp));
+console.log(`Object.isExtensible(temp):`, Object.isExtensible(temp));
+*/
+
+// 11.Object.freeze()
+
+/*
+'use strict';
+const temp = {
+  p: 'hello'
+};
+console.log(`temp 0:`, temp)
+
+Object.freeze(temp);
+
+const desc0 = Object.getOwnPropertyDescriptors(temp);
+console.log(`desc0:`, desc0)
+
+temp.p = 'world';
+console.log(`temp 1:`, temp)
+
+temp.t = 'hello';
+console.log(`temp 2:`, temp)
+
+delete temp.p
+console.log(`temp 3:`, temp)
+*/
+
+// 12.Object.isFrozen()
+
+/*
+const temp = {
+  p: 'hello'
+};
+
+const desc0 = Object.getOwnPropertyDescriptors(temp);
+console.log(`desc0:`, desc0)
+
+Object.freeze(temp);
+
+const desc1 = Object.getOwnPropertyDescriptors(temp);
+console.log(`desc1:`, desc1)
+
+console.log(`Object.isFrozen(temp):`, Object.isFrozen(temp)); // true
+console.log(`Object.isSealed(temp)`, Object.isSealed(temp)); // true
+console.log(`Object.isExtensible(temp)`, Object.isExtensible(temp)); // false
+*/
+
+/*
+const temp = {
+  p: 'hello'
+};
+console.log(`temp 0:`, temp);
+Object.freeze(temp);
+
+console.log(`是否temp对象isFrozen:`, !Object.isFrozen(temp));
+// 确认对象没有被冻结后，再对它的属性赋值，就不会报错了
+if (!Object.isFrozen(temp)) {
+  temp.p = 'world';
+}
+console.log(`temp 1:`, temp);
 */
