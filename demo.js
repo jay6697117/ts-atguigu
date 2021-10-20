@@ -639,3 +639,226 @@ if (!Object.isFrozen(temp)) {
 }
 console.log(`temp 1:`, temp);
 */
+
+// 13.局限性
+/* const temp = { p: 'hello 001' };
+console.log(`temp 0:`, temp);
+
+Object.preventExtensions(temp);
+console.log(`Object.isExtensible(temp):`, Object.isExtensible(temp));
+const desc0 = Object.getOwnPropertyDescriptors(temp);
+console.log(`desc0:`, desc0);
+
+const proto = Object.getPrototypeOf(temp);
+console.log(`proto`, proto);
+
+Object.preventExtensions(proto);
+console.log(`Object.isExtensible(proto):`, Object.isExtensible(proto));
+
+proto.t = 'hello 002';
+console.log(`temp 1:`, temp);
+console.log(`temp.t:`, temp.t); // hello */
+
+/*
+'use strict';
+const temp = {
+  p: 'hello',
+  t: { a: 111, b: 222 }
+};
+console.log(`temp 0:`, temp);
+
+Object.freeze(temp);
+const desc0 = Object.getOwnPropertyDescriptors(temp);
+console.log(`desc0:`, desc0);
+
+temp.t.c = 333;
+console.log(`temp 1:`, temp);
+temp.q = 'lalala';
+console.log(`temp 2:`, temp);
+*/
+
+// 14.属性的 getter 和 setter
+
+/*
+const temp = {};
+Object.defineProperties(temp, {
+  p: {
+    enumerable: true,
+    configurable: true,
+    // getter
+    get() {
+      // 当读取 obj.p 时，getter 起作用
+      console.log('读取了p属性');
+    },
+    // setter
+    set(value) {
+      // 当执行 obj.p = value 操作时，setter 起作用
+      console.log(`设置p属性的value:`, value);
+    }
+  }
+});
+const desc = Object.getOwnPropertyDescriptors(temp);
+console.log(`desc:`, desc);
+*/
+
+/*
+'use strict';
+const user = {
+  name: 'John',
+  surname: 'Smith'
+  // // get: 一个没有参数的函数，在读取属性时工作
+  // get fullName() {
+  //   // 当读取 obj.fullName 时，getter 起作用
+  //   console.log('读取了fullName属性');
+  //   return `${this.name}, ${this.surname}`;
+  // },
+  // // set: 带有一个参数的函数，当属性被设置时调用
+  // set fullName(value) {
+  //   // 当执行 obj.fullName = value 操作时，setter 起作用
+  //   console.log(`设置fullName属性的value:`, value);
+  //   this.name = value.split(', ')[0];
+  //   this.surname = value.split(', ')[1];
+  // }
+};
+Object.defineProperty(user, 'fullName', {
+  // value:'111',//报错:Cannot both specify accessors and a value or writable attribute
+  // writable: false,// 报错:Cannot both specify accessors and a value or writable attribute
+  // enumerable: true, // 可以随意设置
+  // configurable: true, // 可以随意设置
+  // get: 一个没有参数的函数，在读取属性时工作
+  get() {
+    // 当读取 obj.fullName 时，getter 起作用
+    console.log('读取了fullName属性');
+    return `${this.name}, ${this.surname}`;
+  },
+  // set: 带有一个参数的函数，当属性被设置时调用
+  set(value) {
+    // 当执行 obj.fullName = value 操作时，setter 起作用
+    console.log(`设置fullName属性的value:`, value);
+    this.name = value.split(', ')[0];
+    this.surname = value.split(', ')[1];
+  }
+});
+
+console.log(`user 0:`, user);
+const desc0 = Object.getOwnPropertyDescriptors(user);
+console.log(`desc0:`, desc0);
+
+console.log('--------------------------------');
+console.log(`读取user.fullName:`, user.fullName);
+user.fullName = 'hello, world';
+console.log('--------------------------------');
+
+console.log(`user 1:`, user);
+const desc1 = Object.getOwnPropertyDescriptors(user);
+console.log(`desc1:`, desc1);
+
+console.log('--------------------------------');
+let count = 0;
+for (const key in user) {
+  count++;
+  if (Object.hasOwnProperty.call(user, key)) {
+    console.log(`${count}: key:${key} - value:${user[key]}`);
+  }
+}
+*/
+
+// 15.更聪明的 getter/setter
+
+/*
+const user = {};
+Object.defineProperty(user, 'name', {
+  enumerable: true,
+  configurable: true,
+  get() {
+    console.log('get run');
+    return this._name;
+  },
+  set(value) {
+    console.log('set run');
+    console.log(`set value:`, value);
+    if (value.length < 4) {
+      alert('it is too short, must more than or equal four characters');
+      return;
+    }
+    this._name = value;
+  }
+});
+
+console.log(`user 0:`, user);
+const desc0 = Object.getOwnPropertyDescriptors(user);
+console.log(`desc0:`, desc0);
+
+console.log('-----------------1---------------');
+user.name = 'peter';
+console.log('-----------------2---------------');
+
+console.log(`user 1:`, user);
+const desc1 = Object.getOwnPropertyDescriptors(user);
+console.log(`desc1:`, desc1);
+
+console.log('-----------------3---------------');
+Object.defineProperty(user, '_name', {
+  enumerable: false,
+  configurable: false
+});
+console.log(`user 2:`, user);
+const desc2 = Object.getOwnPropertyDescriptors(user);
+console.log(`desc2:`, desc2);
+console.log('-----------------3---------------');
+
+let count = 0;
+for (const key in user) {
+  count++;
+  if (Object.hasOwnProperty.call(user, key)) {
+    console.log(`${count}: key:${key} - value:${user[key]}`);
+  }
+}
+*/
+
+// 16.兼容性
+
+/*
+// function User(name, age) {
+//   this.name = name;
+//   this.age = age;
+// }
+// let john = new User("John", 25);
+// console.log(`john:`, john)
+
+console.log(`moment`, moment);
+function User(name, birthday) {
+  this.name = name;
+  this.birthday = birthday;
+  Object.defineProperty(this, 'age', {
+    enumerable: true,
+    get() {
+      console.log('age get func run～～～');
+      return moment(new Date()).format('YYYY') - moment(new Date(1992, 6, 1)).format('YYYY');
+    },
+    set(value) {
+      console.log(`age set func value:`, value);
+    }
+  });
+}
+let john = new User('John', moment(new Date(1992, 6, 1)).format('YYYY-MM-DD'));
+console.log(`john:`, john);
+
+const desc0 = Object.getOwnPropertyDescriptors(john);
+console.log(`desc0:`, desc0);
+
+console.log('-----------------1---------------');
+
+let count = 0;
+for (const key in john) {
+  count++;
+  if (Object.hasOwnProperty.call(john, key)) {
+    console.log(`${count}: key --> ${key} || value --> ${john[key]}`);
+  }
+}
+
+console.log('-----------------2---------------');
+
+console.log(`john.birthday:`, john.birthday)
+console.log(`john.age:`, john.age)
+*/
