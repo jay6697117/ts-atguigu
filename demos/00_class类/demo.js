@@ -1082,15 +1082,6 @@ class Clock {
     this.timer = null;
     this.template = template;
   }
-  stop() {
-    clearInterval(this.timer);
-  }
-  start() {
-    this.render();
-    this.timer = setInterval(() => {
-      this.render();
-    }, 1000);
-  }
   render() {
     let date = new Date();
     let hours = date.getHours();
@@ -1101,6 +1092,13 @@ class Clock {
     if (secs < 10) secs = '0' + secs;
     let output = this.template.replace('h', hours).replace('m', mins).replace('s', secs);
     console.log(`render output:`, output);
+  }
+  start() {
+    this.render();
+    this.timer = setInterval(() => this.render(), 1000);
+  }
+  stop() {
+    clearInterval(this.timer);
   }
 }
 let clock = new Clock({ template: 'h:m:s' });
