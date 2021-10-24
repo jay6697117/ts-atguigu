@@ -862,3 +862,176 @@ console.log('-----------------2---------------');
 console.log(`john.birthday:`, john.birthday)
 console.log(`john.age:`, john.age)
 */
+
+// 17.Getters/setters
+/*
+class User {
+  constructor(name) {
+    this.name = name; //会调用set方法
+  }
+  // getter
+  get name() {
+    console.log('getter run');
+    console.log(`getter this._name`, this._name);
+    return this._name;
+  }
+  // setter
+  set name(value) {
+    console.log(`setter run value:`, value);
+    if (value.length < 4) {
+      alert('Name is too short.');
+      return;
+    }
+    this._name = value;
+  }
+}
+
+let user = new User('John');
+console.log(`user:`, user);
+console.log(`user.name:`, user.name);
+console.log(`User.prototype 0:`, User.prototype)
+console.log('--------------------------');
+let user1 = new User('hi');
+console.log(`user1:`, user1);
+console.log(`user1.name:`, user1.name);
+console.log(`User.prototype 1:`, User.prototype)
+*/
+
+// 18.计算属性名称 […]
+/* const str = 'say' + 'Hi';
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+  [str]() {
+    alert('Hello');
+  }
+}
+
+// 19.Class 字段
+const user = new User('zjh');
+console.log(`user:`, user);
+user.sayHi();
+ */
+
+/* class User {
+  name = 'John';
+  constructor(age){
+    this.age = age;
+  }
+  sayHi() {
+    console.log(`输出: Hello, ${this.name}!`);
+  }
+}
+const user = new User(22);
+console.log(`user:`, user)
+console.log(`User.prototype:`, User.prototype)
+console.log(`User.prototype.name:`, User.prototype.name)
+console.log(`User.prototype.age:`, User.prototype.age)
+user.sayHi(); // Hello, John!
+ */
+
+/* class User {
+  name = prompt('Name, please?', 'John');
+}
+let user = new User();
+console.log(`user:`, user); */
+
+// 20.使用类字段制作绑定方法
+/* class Button {
+  constructor(value) {
+    this.value = value;
+    this.click = this.click.bind(this);
+  }
+  click() {
+    console.log(`class click this:`, this);
+    console.log(`click this.value:`, this.value);
+    console.log('--------------------');
+  }
+}
+let button = new Button('hello');
+console.log(`button:`, button)
+// button.click();
+setTimeout(button.click, 1000); // undefined
+// setTimeout(function () {
+//   console.log(`setTimeout this:`, this);
+//   button.click();
+// }, 2000); // undefined
+// setTimeout(() => {
+//   console.log(`setTimeout this:`, this);
+//   button.click();
+// }, 2000); // undefined */
+
+/*
+class Button {
+  click1 = function () {
+    console.log(`class click this:`, this);
+    console.log(`click this.value:`, this.value);
+    console.log('-------------------------------');
+  };
+  click2 = () => {
+    console.log(`class click this:`, this);
+    console.log(`click this.value:`, this.value);
+    console.log('-------------------------------');
+  };
+  constructor(value) {
+    this.value = value;
+  }
+  click0() {
+    console.log(`class click this:`, this);
+    console.log(`click this.value:`, this.value);
+    console.log('-------------------------------');
+  }
+}
+
+let button = new Button('hello');
+console.log(`button:`, button);
+console.log('-------------------------------');
+setTimeout(button.click0, 1000); // undefined
+setTimeout(button.click1, 2000); // undefined
+setTimeout(button.click2, 3000); // hello
+*/
+
+// 21.总结
+// Symbol标志
+const sym = Symbol('hello');
+// User类
+class User {
+  click = () => {
+    console.log('--------3--------');
+    console.log(`属性 click this:`, this);
+  }; // 属性
+  [sym] = () => {
+    console.log(`属性 [sym] this:`, this);
+  };// 属性
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }// 构造器
+  sayHi() {
+    console.log(`sayHi方法: 我是${this.name},今年${this.age}岁`);
+  } // 方法
+  // [sym]() {
+  //   console.log(`方法 sym this:`, this);
+  // } // 有计算名称(computed name)的方法
+  get name() {
+    return this._name;
+  } // getter 方法
+  set name(value) {
+    if (value.length < 3) {
+      alert('名字不能小于三个字符');
+    }
+    this._name = value;
+  } // setter 方法
+}
+const user = new User('zjh', 33);
+console.log(`打印 user:`, user);
+console.log('-------1---------');
+user.sayHi();
+console.log('-------2---------');
+user[sym](); // 直接调
+setTimeout(() => {
+  user[sym]();
+}, 1000);// 封装一下
+setTimeout(user[sym], 2000);
+setTimeout(user.click, 3000);
