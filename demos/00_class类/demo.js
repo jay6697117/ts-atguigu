@@ -1039,3 +1039,73 @@ setTimeout(user[sym], 2000);
 setTimeout(user.click, 3000);
 
 */
+
+// 22. Clock 类
+/* //定时器
+let timer;
+//render方法
+let render = template => {
+  let date = new Date();
+  let hours = date.getHours();
+  if (hours < 10) hours = '0' + hours;
+  let mins = date.getMinutes();
+  if (mins < 10) mins = '0' + mins;
+  let secs = date.getSeconds();
+  if (secs < 10) secs = '0' + secs;
+  let output = template.replace('h', hours).replace('m', mins).replace('s', secs);
+  console.log(`output:`, output);
+};
+// Clock类
+function Clock({ template }) {
+  this.template = template;
+}
+// 原型上的stop方法
+Clock.prototype.stop = function () {
+  clearInterval(timer);
+};
+// 原型上的start方法
+Clock.prototype.start = function () {
+  render(this.template);
+  timer = setInterval(() => {
+    render(this.template);
+  }, 1000);
+};
+let clock = new Clock({ template: 'h:m:s' });
+console.log(`clock:`, clock);
+clock.start();
+setTimeout(() => {
+  clock.stop();
+}, 5000); */
+
+class Clock {
+  constructor({ template }) {
+    this.timer = null;
+    this.template = template;
+  }
+  stop() {
+    clearInterval(this.timer);
+  }
+  start() {
+    this.render();
+    this.timer = setInterval(() => {
+      this.render();
+    }, 1000);
+  }
+  render() {
+    let date = new Date();
+    let hours = date.getHours();
+    if (hours < 10) hours = '0' + hours;
+    let mins = date.getMinutes();
+    if (mins < 10) mins = '0' + mins;
+    let secs = date.getSeconds();
+    if (secs < 10) secs = '0' + secs;
+    let output = this.template.replace('h', hours).replace('m', mins).replace('s', secs);
+    console.log(`render output:`, output);
+  }
+}
+let clock = new Clock({ template: 'h:m:s' });
+console.log(`clock:`, clock);
+clock.start();
+setTimeout(() => {
+  clock.stop();
+}, 5000);
