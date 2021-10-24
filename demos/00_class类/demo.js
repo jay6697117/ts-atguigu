@@ -993,6 +993,8 @@ setTimeout(button.click2, 3000); // hello
 */
 
 // 21.总结
+/*
+
 // Symbol标志
 const sym = Symbol('hello');
 // User类
@@ -1035,3 +1037,5 @@ setTimeout(() => {
 }, 1000);// 封装一下
 setTimeout(user[sym], 2000);
 setTimeout(user.click, 3000);
+
+*/
