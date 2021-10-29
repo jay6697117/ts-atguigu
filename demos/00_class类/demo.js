@@ -1041,7 +1041,8 @@ setTimeout(user.click, 3000);
 */
 
 // 22. Clock 类
-/* //定时器
+/*
+//定时器
 let timer;
 //render方法
 let render = template => {
@@ -1075,8 +1076,10 @@ console.log(`clock:`, clock);
 clock.start();
 setTimeout(() => {
   clock.stop();
-}, 5000); */
+}, 5000);
+*/
 
+/*
 class Clock {
   constructor({ template }) {
     this.timer = null;
@@ -1107,3 +1110,74 @@ clock.start();
 setTimeout(() => {
   clock.stop();
 }, 5000);
+*/
+
+// 23. “extends” 关键字
+/*
+class Animal {
+  constructor(name) {
+    this.speed = 0;
+    this.name = name;
+  }
+  run(speed) {
+    this.speed = speed;
+    console.log(`${this.name} 跑以速度 ${this.speed}km/h`);
+  }
+  stop() {
+    this.speed = 0;
+    console.log(`${this.name} 停止在原地`);
+  }
+}
+
+console.log('-------------------------------');
+let animal = new Animal('某动物');
+console.log(`animal 0:`, animal);
+animal.run(100);
+console.log(`animal 1:`, animal);
+animal.stop();
+console.log(`animal 2:`, animal);
+console.log('-------------------------------');
+
+class Rabbit extends Animal {
+  hide() {
+    console.log(`${this.name} 隐藏了起来`);
+  }
+}
+
+let rabbit = new Rabbit('大白兔');
+console.log(`rabbit 0:`, rabbit);
+rabbit.run(500);
+console.log(`rabbit 1:`, rabbit);
+rabbit.stop();
+console.log(`rabbit 2:`, rabbit);
+rabbit.hide()
+console.log(`rabbit 3:`, rabbit);
+console.log('-------------------------------');
+*/
+
+function fn(content) {
+  class Foo {
+    constructor() {
+      this.content = content;
+    }
+    say() {
+      console.log(`say:`, this.content);
+    }
+  }
+  return Foo;
+}
+
+class User extends fn('hello, world 666!') {
+  constructor(name) {
+    super();
+    this.name = name;
+  }
+  sayHi() {
+    console.log(`${this.name}说: 你好!`);
+  }
+}
+
+const user = new User('张金辉');
+console.log(`user`, user);
+user.say();
+user.sayHi();
