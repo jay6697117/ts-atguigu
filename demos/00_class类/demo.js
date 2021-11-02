@@ -1155,6 +1155,7 @@ console.log(`rabbit 3:`, rabbit);
 console.log('-------------------------------');
 */
 
+/*
 function fn(content) {
   class Foo {
     constructor() {
@@ -1181,3 +1182,240 @@ const user = new User('张金辉');
 console.log(`user`, user);
 user.say();
 user.sayHi();
+*/
+
+// 24. 重写方法
+
+/* class Animal {
+  constructor(name) {
+    this.speed0 = 0;
+    this.name0 = name;
+  }
+  run(speed) {
+    this.speed = speed;
+    console.log(`${this.name0}跑以速度${this.speed0} km/h`);
+  }
+  stop() {
+    this.speed = 0;
+    console.log(`${this.name0}停止了`);
+  }
+}
+
+class Rabbit extends Animal {
+  constructor(name1, age1) {
+    super(name1);
+    this.age1 = age1;
+  }
+  hide() {
+    super.stop();
+    // setTimeout(() => {
+    //   console.log('----1----');
+    //   super.stop();
+    // }, 2000);
+    console.log(`${this.name0}隐藏了`);
+  }
+}
+
+let animal = new Animal('动物');
+console.log(`animal:`, animal);
+let rabbit = new Rabbit('大白兔', 33);
+console.log(`rabbit:`, rabbit);
+rabbit.run(10);
+rabbit.hide();
+console.log(`rabbit.name0:`, rabbit.name0)
+console.log(`rabbit.age1:`, rabbit.age1) */
+
+/* class Animal {
+  name = 'animal';
+  constructor() {
+    console.log(`Animal constructor this.name:`, this.name);
+  }
+}
+class Rabbit extends Animal {
+  name = 'rabbit';
+  constructor(...params) {
+    super(...params);
+  }
+}
+
+new Animal(); // animal
+new Rabbit(); // animal */
+
+/* class Animal {
+  name = 'animal-类字段name'; //类字段: 基类（还未继承任何东西的那种）,在构造函数调用前初始化。
+  constructor() {
+    this.showName(); //而不是 console.log(this.name)
+  }
+  showName() {
+    //而不是 this.name = 'animal'
+    console.log(`我是 animal || ${this.name}`);
+  }
+}
+
+class Rabbit extends Animal {
+  name = 'rabbit-类字段name'; //类字段: 对于派生类，在 super() 后立刻初始化。
+  constructor(...params) {
+    super(...params);
+  }
+  showName() {
+    console.log(`我是 rabbit || ${this.name}`);
+  }
+}
+
+const a = new Animal(); // animal
+// console.log(`a:`, a);
+const r = new Rabbit(); // rabbit
+// console.log(`r:`, r); */
+
+// 25.阮一峰es6: Class 的基本语法
+// function Point(x, y) {
+//   this.x = x;
+//   this.y = y;
+// }
+
+// Point.prototype.toString = function () {
+//   return '(' + this.x + ', ' + this.y + ')';
+// };
+
+// function Point(x, y) {
+//   this.x = x;
+//   this.y = y;
+// }
+
+// Point.prototype = {
+//   constructor: Point,
+//   add() {
+//     return `${this.x} + ${this.y}`;
+//   },
+//   sub() {
+//     return `${this.x} - ${this.y}`;
+//   }
+// };
+
+// Point.prototype.add = function () {
+//   return `${this.x} + ${this.y}`;
+// };
+// Point.prototype.sub = function () {
+//   return `${this.x} - ${this.y}`;
+// };
+
+// Object.assign的方法可以枚举
+// Object.assign(Point.prototype, {
+//   add() {
+//     return `${this.x} + ${this.y}`;
+//   },
+//   sub() {
+//     return `${this.x} - ${this.y}`;
+//   }
+// });
+
+// class Point {
+//   // 构造方法
+//   constructor(x, y) {
+//     this.x = x;
+//     this.y = y;
+//   }
+//   add() {
+//     return `${this.x} + ${this.y}`;
+//   }
+//   sub() {
+//     return `${this.x} - ${this.y}`;
+//   }
+// }
+
+// const p = new Point(1, 2);
+// console.log(`p:`, p);
+// const res1 = p.add();
+// const res2 = p.sub();
+// console.log(`res1:`, res1);
+// console.log(`res2:`, res2);
+// console.log(`typeof Point:`, typeof Point); // "function"
+// console.log(Point.prototype.constructor === Point); // true
+
+// console.log(Object.keys(Point.prototype)); //不可枚举
+// console.log(Object.getOwnPropertyNames(Point.prototype));
+
+// function Foo() {
+//   return Object.create(null);
+// }
+
+// class Foo {
+//   constructor() {
+//     return Object.create(null);
+//   }
+// }
+
+// console.log(`new Foo() instanceof Foo:`, new Foo() instanceof Foo);
+
+//定义类
+// class Point {
+//   constructor(x, y) {
+//     this.x = x;
+//     this.y = y;
+//   }
+
+//   toString() {
+//     return this.x + ' -- ' + this.y;
+//   }
+// }
+
+// const p = new Point(1, 2);
+
+// console.log(p.toString()); // 1 -- 2
+// console.log(p.hasOwnProperty('x')) // true
+// console.log(p.hasOwnProperty('y')) // true
+// console.log(p.hasOwnProperty('toString')); // false
+// console.log(p.__proto__.hasOwnProperty('toString')) // true
+// console.log(Point.prototype.hasOwnProperty('toString')) // true
+
+/* class Point {}
+
+const p1 = new Point(2, 3);
+const p2 = new Point(3, 2);
+console.log(`Object.getPrototypeOf(p1)`, Object.getPrototypeOf(p1));
+console.log(`Object.getPrototypeOf(p2)`, Object.getPrototypeOf(p2));
+console.log(Object.getPrototypeOf(p1) === Point.prototype);
+console.log(Object.getPrototypeOf(p2) === Point.prototype)
+
+Object.getPrototypeOf(p1).printName = function () {
+  return 'Oops 1';
+};
+
+// Object.getPrototypeOf(p2).printName = function () {
+//   return 'Oops 2';
+// };
+
+// Point.prototype.printName = function () {
+//   return 'Oops 3';
+// };
+
+console.log(p1.printName()); // "Oops"
+console.log(p2.printName()); // "Oops"
+
+const p3 = new Point(4, 2);
+console.log(p3.printName()); // "Oops" */
+
+
+// 26.取值函数（getter）和存值函数（setter）
+class MyClass {
+  constructor() {
+    // ...
+  }
+  get prop() {
+    return 'getter';
+  }
+  set prop(value) {
+    console.log('setter: '+value);
+  }
+}
+
+let inst = new MyClass();
+
+inst.prop = 123;
+// setter: 123
+
+inst.prop
+// 'getter'
+
+// 看到:
+// https://wangdoc.com/es6/class.html#%E5%8F%96%E5%80%BC%E5%87%BD%E6%95%B0getter%E5%92%8C%E5%AD%98%E5%80%BC%E5%87%BD%E6%95%B0setter
