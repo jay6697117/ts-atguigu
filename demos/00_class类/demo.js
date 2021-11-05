@@ -1395,27 +1395,133 @@ console.log(p2.printName()); // "Oops"
 const p3 = new Point(4, 2);
 console.log(p3.printName()); // "Oops" */
 
-
 // 26.取值函数（getter）和存值函数（setter）
+
+/*
 class MyClass {
-  constructor() {
-    // ...
-  }
+  constructor() {}
   get prop() {
-    return 'getter';
+    return 'prop getter 1';
   }
   set prop(value) {
-    console.log('setter: '+value);
+    console.log('setter1: ' + value);
+  }
+  get prop1() {
+    return 'prop getter 2';
+  }
+  set prop1(value) {
+    console.log('setter2: ' + value);
   }
 }
 
-let inst = new MyClass();
+let instance = new MyClass();
 
-inst.prop = 123;
+instance.prop = 123;
 // setter: 123
+const res1 = instance.prop;
+console.log(res1)
+// 'prop getter'
 
-inst.prop
-// 'getter'
+instance.prop1 = 456;
+const res2 = instance.prop1;
+console.log(res2)
+*/
 
-// 看到:
-// https://wangdoc.com/es6/class.html#%E5%8F%96%E5%80%BC%E5%87%BD%E6%95%B0getter%E5%92%8C%E5%AD%98%E5%80%BC%E5%87%BD%E6%95%B0setter
+/* class CustomHTMLElement {
+  constructor(element) {
+    this.element = element;
+  }
+
+  get html() {
+    return this.element.innerHTML;
+  }
+
+  set html(value) {
+    this.element.innerHTML = value;
+  }
+}
+
+console.log(`CustomHTMLElement.prototype`, CustomHTMLElement.prototype);
+console.log(
+  `Object.getOwnPropertyNames(CustomHTMLElement.prototype):`,
+  Object.getOwnPropertyNames(CustomHTMLElement.prototype)
+);
+
+const ele = new CustomHTMLElement({ innerHTML: 'aaaa' });
+console.log(`ele 1`, ele);
+console.log(`ele.html:`, ele.html);
+ele.html = 'bbb';
+console.log(`ele 2`, ele);
+
+const desc = Object.getOwnPropertyDescriptor(CustomHTMLElement.prototype, 'html');
+console.log(`desc:`, desc); */
+
+// 属性表达式
+
+/* let methodName = 'getArea';
+
+class Square {
+  constructor(length) {
+    this.length = length
+  }
+
+  [methodName]() {
+    console.log(`methodName:`, methodName)
+  }
+}
+
+const s = new Square(11);
+console.log(`s:`, s) */
+
+// Class 表达式
+
+// const MyClass = class Mc {
+//   getClassName() {
+//     console.log(`Mc:`, Mc);
+//     console.log(`Mc.name:`, Mc.name);
+//     return Mc.name;
+//   }
+// };
+
+/* const MyClass = class Mc {
+  getClassName() {
+    console.log(`Mc:`, Mc);
+    console.log(`Mc.name:`, Mc.name);
+    // return Mc.name;
+    console.log(`MyClass:`, MyClass);
+    console.log(`MyClass.name:`, MyClass.name);
+    return `${MyClass.name} -- ${Mc.name}`;
+  }
+};
+
+console.log(`MyClass.name:`, MyClass.name);
+console.log('----------------------');
+let instance = new MyClass();
+console.log(`instance:`, instance);
+console.log(`instance.name:`, instance.name);
+console.log('----------------------');
+const res = instance.getClassName();
+console.log(`res:`, res) */
+
+// const Person = class {
+//   constructor(name) {
+//     this.name = name;
+//   }
+//   sayName() {
+//     console.log(this.name);
+//   }
+// };
+
+
+// p1是一个立即执行的类的实例
+/* const p1 = new (class {
+  constructor(name) {
+    this.name = name;
+  }
+  sayName() {
+    console.log(this.name);
+  }
+})('zhangjinhui');
+
+console.log(`p1:`, p1);
+ */
