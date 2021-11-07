@@ -1512,7 +1512,6 @@ console.log(`res:`, res) */
 //   }
 // };
 
-
 // p1是一个立即执行的类的实例
 /* const p1 = new (class {
   constructor(name) {
@@ -1525,3 +1524,177 @@ console.log(`res:`, res) */
 
 console.log(`p1:`, p1);
  */
+
+// 注意点：
+// {
+//   class Bar extends Foo {}
+//   let Foo = class {};
+//   // class Bar extends Foo {}
+//   new Bar();
+// }
+
+/* class Point1 {}
+const Point2 = class Pt {};
+const Point3 = class {};
+console.log(`Point1.name:`, Point1.name);
+console.log(`Point2.name:`, Point2.name);
+console.log(`Point3.name:`, Point3.name); */
+
+/* class Foo {
+  [Symbol.iterator] = function* () {
+    for (let arg of this.args) {
+      yield arg + '-666';
+    }
+  };
+  constructor(...args) {
+    this.args = args;
+  }
+  *[Symbol.iterator]() {
+    for (let arg of this.args) {
+      yield arg + '-888';
+    }
+  }
+}
+
+let foo = new Foo(1, 2, 3);
+console.log(`foo`, foo);
+
+const ge = foo[Symbol.iterator]();
+console.log(`ge`, ge);
+console.log(`ge.next():`, ge.next());
+console.log(`ge.next():`, ge.next());
+console.log(`ge.next():`, ge.next());
+console.log(`ge.next():`, ge.next());
+
+for (const iterator of foo) {
+  console.log(`iterator 2:`, iterator);
+} */
+
+/*
+class Logger {
+  constructor() {
+    this.printName = this._printName.bind(this);
+    // this.printName = () => {
+    //   console.log(`this 000:`, this);
+    //   return this._printName();
+    // };
+  }
+  _printName(name = 'there') {
+    console.log(`_printName this:`, this);
+    this._print(`Hello ${name}`);
+  }
+  _print(text) {
+    console.log(`_print text:`, text);
+  }
+}
+
+const logger = new Logger();
+console.log(`logger:`, logger);
+console.log('-------------------------');
+logger.printName();
+console.log('-------------------------');
+const { printName } = logger;
+printName();
+*/
+
+// logger.printName()();
+// console.log('------------------------');
+// logger.printName();
+// logger.__proto__.printName();
+// Logger.prototype.printName();
+// console.log('------------------------');
+// const { printName } = logger;
+// printName()();
+// const { printName } = logger.__proto__;
+// printName();
+// printName.bind(logger)();
+// printName.bind(Logger.prototype)();
+
+// bind绑定this 和 使用箭头函数1
+/* class Logger {
+  constructor() {
+    this.printName = this._printName.bind(this);
+    // this.printName = () => {
+    //   console.log(`this 000:`, this);
+    //   return this._printName();
+    // };
+  }
+  _printName(name = 'there') {
+    console.log(`_printName this:`, this);
+    this._print(`Hello ${name}`);
+  }
+  _print(text) {
+    console.log(`_print text:`, text);
+  }
+}
+
+const logger = new Logger();
+console.log(`logger:`, logger);
+console.log('-------------------------');
+logger.printName();
+console.log('-------------------------');
+const { printName } = logger;
+printName(); */
+
+// 使用箭头函数2
+
+/* class Obj {
+  constructor() {
+    this.getThis = () => {
+      return this.log();
+    };
+  }
+  log() {
+    console.log('log');
+  }
+}
+const myObj = new Obj();
+console.log(`myObj:`, myObj);
+myObj.getThis();
+console.log('---------------------------');
+const { getThis } = myObj;
+getThis(); */
+
+
+/*
+
+class Logger {
+  printName(name = 'there') {
+    console.log(`Logger printName this:`, this);
+    this.print(`Hello, ${name}`);
+  }
+
+  print(text) {
+    console.log(text);
+  }
+}
+
+function selfish(target) {
+  const cache = new WeakMap();
+  // const cache = new Map();
+  const handler = {
+    get(target, key) {
+      const value = Reflect.get(target, key);
+      if (typeof value !== 'function') {
+        return value;
+      }
+      if (!cache.has(value)) {
+        cache.set(value, value.bind(target));
+      }
+      return cache.get(value);
+    }
+  };
+  const proxy = new Proxy(target, handler);
+  return proxy;
+}
+
+// const logger = new Logger();
+const logger = selfish(new Logger());
+const { printName } = logger;
+printName('world!');
+
+*/
+
+
+// 静态方法
+// https://wangdoc.com/es6/class.html#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95
