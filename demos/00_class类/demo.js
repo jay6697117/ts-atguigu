@@ -1655,7 +1655,6 @@ console.log('---------------------------');
 const { getThis } = myObj;
 getThis(); */
 
-
 /*
 
 class Logger {
@@ -1695,6 +1694,38 @@ printName('world!');
 
 */
 
-
 // 静态方法
 // https://wangdoc.com/es6/class.html#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95
+/* class User {
+  static sayHi() {
+    console.log(`sayHi this:`, this);
+    console.log('sayHi');
+  }
+
+  sayHello() {
+    console.log(`sayHello this:`, this);
+    console.log('sayHello');
+  }
+}
+
+const user = new User();
+console.log(`user:`, user);
+console.log(`User.prototype:`, User.prototype);
+console.dir(User); */
+
+
+// 从这个例子还可以看出，静态方法可以与非静态方法重名
+class Foo {
+  static bar() {
+    console.log('结果:', this === Foo);
+    this.baz();
+  }
+  static baz() {
+    console.log('hello');
+  }
+  baz() {
+    console.log('world');
+  }
+}
+
+Foo.bar() // hello
