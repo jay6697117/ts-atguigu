@@ -1695,7 +1695,6 @@ printName('world!');
 */
 
 // 静态方法
-// https://wangdoc.com/es6/class.html#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95
 /* class User {
   static sayHi() {
     console.log(`sayHi this:`, this);
@@ -1713,6 +1712,7 @@ console.log(`user:`, user);
 console.log(`User.prototype:`, User.prototype);
 console.dir(User); */
 
+/*
 
 // 从这个例子还可以看出，静态方法可以与非静态方法重名
 class Foo {
@@ -1729,3 +1729,59 @@ class Foo {
 }
 
 Foo.bar() // hello
+
+*/
+
+/*
+
+// 父类的静态方法，可以被子类继承
+class Foo {
+  static sayHello() {
+    return 'hello';
+  }
+}
+
+class Bar extends Foo {
+}
+
+ console.dir(Foo);
+ console.dir(Bar);
+
+Bar.sayHello(); // 'hello'
+
+*/
+
+
+/*
+
+// 静态方法也是可以从super对象上调用的
+class Foo {
+  static sayHello() {
+    return 'hello';
+  }
+}
+
+class Bar extends Foo {
+  static sayHello1() {
+    console.log(`super.sayHello`, super.sayHello);
+    console.log(`super.sayHello === Foo.sayHello:`, super.sayHello === Foo.sayHello);
+    return super.sayHello() + ', too';
+  }
+}
+
+console.dir(Foo);
+console.dir(Bar);
+
+console.log('---------1---------');
+console.log(Foo.sayHello()); // "hello"
+console.log('---------2---------');
+console.log(Bar.sayHello()); // "hello"
+console.log('---------3---------');
+console.log(Bar.sayHello1()); // "hello, too"
+console.log('---------4---------');
+
+*/
+
+
+// 实例属性的新写法
+// https://wangdoc.com/es6/class.html#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7%E7%9A%84%E6%96%B0%E5%86%99%E6%B3%95
