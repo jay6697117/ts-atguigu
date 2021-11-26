@@ -1902,10 +1902,15 @@ console.dir(counter);
 
 */
 
+/*
 class Point {
   #x;
 
   constructor(x = 0) {
+    if (!parseInt(x)) {
+      this.#x = 0;
+      return;
+    }
     this.#x = parseInt(x);
   }
 
@@ -1914,9 +1919,56 @@ class Point {
   }
 
   set x(value) {
+    if (!parseInt(value)) {
+      this.#x = 0;
+      return;
+    }
     this.#x = parseInt(value);
   }
 }
 
-const point = new Point('aa');
+const point = new Point('1aaaa');
 console.dir(point);
+
+*/
+
+/*
+class Foo {
+  #a;
+  #b;
+  constructor(a, b) {
+    this.#a = a;
+    this.#b = b;
+  }
+  #sum() {
+    return this.#a + this.#b;
+  }
+  printSum() {
+    console.log(this.#sum());
+  }
+}
+
+const foo = new Foo(1,2);
+console.dir(foo);
+foo.printSum();
+*/
+
+
+/*
+// #x是一个私有属性，它的读写都通过get #x()和set #x()来完成
+class Counter {
+  #xValue = 0;
+
+  constructor() {}
+
+  get #x() {
+    return this.#xValue;
+  }
+  set #x(value) {
+    this.#xValue = value;
+  }
+}
+
+const counter = new Counter();
+console.log(`counter:`, counter);
+*/
