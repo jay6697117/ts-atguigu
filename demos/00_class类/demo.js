@@ -1751,7 +1751,6 @@ Bar.sayHello(); // 'hello'
 
 */
 
-
 /*
 
 // 静态方法也是可以从super对象上调用的
@@ -1782,6 +1781,142 @@ console.log('---------4---------');
 
 */
 
-
 // 实例属性的新写法
-// https://wangdoc.com/es6/class.html#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7%E7%9A%84%E6%96%B0%E5%86%99%E6%B3%95
+/* class IncreasingCounter {
+  constructor() {
+    this._count = 0;
+  }
+  get value() {
+    console.log('Getting the current value!');
+    return this._count;
+  }
+  increment() {
+    this._count++;
+  }
+}
+
+class IncreasingCounter {
+  _count = 0;
+  get value() {
+    console.log('Getting the current value!');
+    return this._count;
+  }
+  increment() {
+    this._count++;
+  }
+}
+
+const val = new IncreasingCounter();
+console.log(`val:`, val); */
+
+/* class Foo {
+  bar = 'hello';
+  baz = 'world';
+  constructor(bar, baz) {
+    this.bar = bar || this.bar;
+    this.baz = baz || this.baz;
+  }
+}
+
+const foo = new Foo();
+console.log(`foo:`, foo);
+
+const foo1 = new Foo('hello1','world1');
+console.log(`foo1:`, foo1); */
+
+// 静态属性
+
+/*
+class Foo {}
+
+Foo.prop = 1;
+console.dir(Foo);
+Foo.prop; // 1
+const foo = new Foo();
+console.dir(foo);
+console.log(`foo.prop`, foo.prop);
+*/
+
+/*
+// 提案
+class MyClass {
+  static myStaticProp = 42;
+
+  constructor() {
+    console.log(`MyClass.myStaticProp:`, MyClass.myStaticProp); //42
+  }
+}
+
+new MyClass();
+*/
+
+/*
+
+// 静态属性的新老写法
+
+console.log('-------------------------');
+class MyClass {
+  static myStaticProp = 42;
+}
+console.dir(MyClass);
+console.log(`MyClass.myStaticProp`, MyClass.myStaticProp);
+
+console.log('-------------------------');
+
+// 老写法
+class Foo {}
+Foo.prop = 111;
+console.dir(Foo);
+console.log(`Foo.prop:`, Foo.prop)
+
+console.log('-------------------------');
+
+// 新写法
+class Foo1 {
+  static prop1 = 222;
+}
+console.dir(Foo1);
+console.log(`Foo1.prop1:`, Foo1.prop1);
+
+console.log('-------------------------');
+
+*/
+
+/*
+
+// 私有属性的提案;
+class IncreasingCounter {
+  #count = 0;
+  get value() {
+    console.log('Getting the current value!');
+    return this.#count;
+  }
+  increment() {
+    this.#count++;
+  }
+}
+console.dir(IncreasingCounter);
+
+const counter = new IncreasingCounter();
+console.dir(counter);
+
+*/
+
+class Point {
+  #x;
+
+  constructor(x = 0) {
+    this.#x = parseInt(x);
+  }
+
+  get x() {
+    return this.#x;
+  }
+
+  set x(value) {
+    this.#x = parseInt(value);
+  }
+}
+
+const point = new Point('aa');
+console.dir(point);
