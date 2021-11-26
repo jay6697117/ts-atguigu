@@ -1953,7 +1953,6 @@ console.dir(foo);
 foo.printSum();
 */
 
-
 /*
 // #x是一个私有属性，它的读写都通过get #x()和set #x()来完成
 class Counter {
@@ -1972,3 +1971,65 @@ class Counter {
 const counter = new Counter();
 console.log(`counter:`, counter);
 */
+
+/*
+
+// 允许从实例foo上面引用私有属性;
+class Foo {
+  //私有属性
+  #privateValue = 42;
+  //静态方法
+  static getPrivateValue(inst) {
+    console.dir(this);
+    console.log('---1---');
+    return inst.#privateValue;
+  }
+  //实例方法
+  getPrivateValue1() {
+    console.dir(this);
+    console.log('---3---');
+    return this.#privateValue;
+  }
+}
+console.dir(Foo);
+console.log('---0---');
+console.log(Foo.getPrivateValue(new Foo()));
+console.log('---2----');
+console.log(new Foo().getPrivateValue1()); // 42
+console.log('---4---');
+
+*/
+
+
+/*
+class FakeMath {
+  // 静态实例属性
+  static PI = 22 / 7;
+  // 静态私有属性
+  static #totallyRandomNumber = 4;
+  // 静态私有方法
+  static #computeRandomNumber() {
+    console.log(`#computeRandomNumber this --:`);
+    console.dir(this);
+    // return FakeMath.#totallyRandomNumber;
+    return this.#totallyRandomNumber;
+  }
+  // 静态实例方法
+  static random() {
+    console.log(`random this --:`);
+    console.dir(this);
+    console.log('I heard you like random numbers…');
+    // return FakeMath.#computeRandomNumber();
+    return this.#computeRandomNumber();
+  }
+}
+console.dir(FakeMath);
+const result = FakeMath.random();
+console.log('----------------------')
+console.log(`FakeMath.PI`, FakeMath.PI);
+console.log(`result:`, result);
+
+*/
+
+
+// in 运算符
