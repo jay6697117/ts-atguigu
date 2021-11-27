@@ -2000,7 +2000,6 @@ console.log('---4---');
 
 */
 
-
 /*
 class FakeMath {
   // 静态实例属性
@@ -2031,5 +2030,33 @@ console.log(`result:`, result);
 
 */
 
-
 // in 运算符
+// class A {
+//   #foo = '111';
+//   use(obj) {
+//     console.log(`obj:`, obj);
+//     console.log(`this:`, this);
+//     if ('#foo' in obj) {
+//       // 私有属性 #foo 存在
+//       return true;
+//     } else {
+//       // 私有属性 #foo 不存在
+//       return false;
+//     }
+//   }
+// }
+
+// const a = new A();
+// const res = a.use(a);
+// console.log(`res:`, res);
+
+class A {
+  #foo = 0;
+  m() {
+    console.log(`this:`, this)
+    console.log('#foo' in this); // true
+    console.log('#bar' in this); // false
+  }
+}
+
+new A().m();
