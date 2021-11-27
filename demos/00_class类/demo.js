@@ -2152,7 +2152,6 @@ A.test(o2.__proto__); // true
 
 */
 
-
 /*
 const person = {
   isHuman: false,
@@ -2174,3 +2173,94 @@ console.log(target);
 console.log(returnedTarget);
 console.log(source);
 */
+
+// 静态块
+
+
+/*
+function fn(param) {
+  if (!param && param !== 0) {
+    return { y: 0, z: 0 };
+  } else {
+    if (param.toString().length >= 2) {
+      return {
+        y: parseInt(param.toString().substr(0, 2).split('')[0]),
+        z: parseInt(param.toString().substr(0, 2).split('')[1])
+      };
+    } else {
+      return { y: param, z: 0 };
+    }
+  }
+}
+
+class C {
+  static x = 4;
+  static y;
+  static z;
+
+  //写在内部
+  constructor(){
+    try {
+      const obj = fn(C.x);
+      C.y = obj.y;
+      C.z = obj.z;
+    } catch {
+      C.y = 0;
+      C.z = 0;
+    }
+  }
+}
+
+// console.dir(C);
+// new C();
+// console.dir(C);
+
+// console.dir(C);
+//写在外部
+// try {
+//   const obj = fn(C.x);
+//   C.y = obj.y;
+//   C.z = obj.z;
+// } catch {
+//   C.y = 0;
+//   C.z = 0;
+// }
+// console.dir(C);
+*/
+
+
+
+function fn(param) {
+  if (!param && param !== 0) {
+    return { y: 0, z: 0 };
+  } else {
+    if (param.toString().length >= 2) {
+      return {
+        y: parseInt(param.toString().substr(0, 2).split('')[0]),
+        z: parseInt(param.toString().substr(0, 2).split('')[1])
+      };
+    } else {
+      return { y: param, z: 0 };
+    }
+  }
+}
+
+class C {
+  static x = 456;
+  static y;
+  static z;
+  //静态块: 静态属性初始化
+  static {
+    try {
+      const obj = fn(C.x);
+      C.y = obj.y;
+      C.z = obj.z;
+    } catch {
+      C.y = 0;
+      C.z = 0;
+    }
+  }
+}
+console.dir(C);
+
+// 类的内部有一个 static 代码块，这就是静态块。它的好处是将静态属性y和z的初始化逻辑，写入了类的内部，而且只运行一次(重点)。
