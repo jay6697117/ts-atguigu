@@ -2176,7 +2176,6 @@ console.log(source);
 
 // 静态块
 
-
 /*
 function fn(param) {
   if (!param && param !== 0) {
@@ -2228,7 +2227,7 @@ class C {
 // console.dir(C);
 */
 
-
+/*
 
 function fn(param) {
   if (!param && param !== 0) {
@@ -2263,4 +2262,46 @@ class C {
 }
 console.dir(C);
 
-// 类的内部有一个 static 代码块，这就是静态块。它的好处是将静态属性y和z的初始化逻辑，写入了类的内部，而且只运行一次(重点)。
+// 类的内部有一个 static 代码块，这就是静态块。它的好处是将静态属性y和z的初始化逻辑，写入了类的内部，而且只运行一次(重点)
+
+*/
+
+/*
+class C {
+  static x = 1;
+  //静态块内部可以使用类名或this, 指代当前类
+  static {
+    console.log(`this:`, this);
+    console.log(`this === C :`, this === C);
+    console.log(`this.x`, this.x); //1
+    console.log(`C.x`, C.x); //1
+  }
+}
+console.dir(C);
+*/
+
+
+/*
+// 除了静态属性的初始化，静态块还有一个作用，就是将私有属性与类的外部代码分享。
+let getX;
+class C {
+  //私有属性
+  #x = 100;
+  // 静态块
+  static {
+    getX = obj => obj.#x;
+  }
+}
+console.dir(C);
+const res = getX(new C());
+console.log(`res:`, res);
+
+// #x是类的私有属性，如果类外部的getX()方法希望获取这个属性，以前是要写在类的constructor()方法里面，这样的话，每次新建实例都会定义一次getX()方法。现在可以写在静态块里面，这样的话，只在类生成时定义一次
+// 静态块里面只会定义一次getX()方法，而写在constructor里面，每次实例化一次都会定义一次getX()方法
+// 写在外部，问题就是将类的内部逻辑写到了外部，不符合某一区域逻辑都写一起的编码原则
+// 1.类生成时(定义类)  2.新建实例(new + 类名 实例化一个对象)
+*/
+
+
+
+// new.target 属性
