@@ -2280,7 +2280,6 @@ class C {
 console.dir(C);
 */
 
-
 /*
 // 除了静态属性的初始化，静态块还有一个作用，就是将私有属性与类的外部代码分享。
 let getX;
@@ -2302,6 +2301,54 @@ console.log(`res:`, res);
 // 1.类生成时(定义类)  2.新建实例(new + 类名 实例化一个对象)
 */
 
-
-
 // new.target 属性
+
+/*
+
+
+// 下面的代码确保构造函数只能通过new命令调用
+function Person(name) {
+  console.log(this);
+  console.dir(new.target);
+  console.log(`new.target === Person:`, new.target === Person);
+  this.name = name;
+
+  if (new.target === Person) {
+    console.log('生成实例成功');
+    this.name = name;
+  } else {
+    throw new Error('必须使用 new 命令生成实例');
+  }
+}
+
+console.log('-------------------------------')
+const p1 = new Person('lalala1');
+console.log('-------------------------------')
+const p2 = Person.call(p1, 'lalala2');
+
+*/
+
+// Class 内部调用new.target，返回当前 Class
+class Rectangle {
+  constructor(length, width) {
+    console.dir(new.target);
+    if (new.target !== undefined) {
+      this.length = length;
+      this.width = width;
+    }
+  }
+}
+const obj = new Rectangle(1, 2); // 输出 true
+console.log(`obj:`, obj);
+
+console.log('--------------------------------------')
+
+class Square extends Rectangle {
+  constructor(length, width) {
+    super(length, width);
+    this.length1 = length;
+    this.width1 = width;
+  }
+}
+const obj1 = new Square(3, 4);
+console.log(`obj1:`, obj1);
