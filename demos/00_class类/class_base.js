@@ -2359,6 +2359,8 @@ console.log(`obj1:`, obj1);
 
 */
 
+
+/*
 class Shape {
   constructor(length, width) {
     console.dir(new.target);
@@ -2384,3 +2386,4 @@ console.log(`y:`, y);
 const x = new Shape();  // 报错
 
 // 上面代码中, Shape类, 只能用于继承, 不能被实例化
+*/
