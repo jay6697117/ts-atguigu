@@ -2328,11 +2328,13 @@ const p2 = Person.call(p1, 'lalala2');
 
 */
 
+/*
 // Class 内部调用new.target，返回当前 Class
+// 子类继承父类时，new.target会返回子类
 class Rectangle {
   constructor(length, width) {
-    console.dir(new.target);
     if (new.target !== undefined) {
+      console.dir(new.target);
       this.length = length;
       this.width = width;
     }
@@ -2341,14 +2343,44 @@ class Rectangle {
 const obj = new Rectangle(1, 2); // 输出 true
 console.log(`obj:`, obj);
 
-console.log('--------------------------------------')
+console.log('--------------------------------------');
 
 class Square extends Rectangle {
   constructor(length, width) {
-    super(length, width);
-    this.length1 = length;
-    this.width1 = width;
+    if (new.target !== undefined) {
+      super(length, width);
+      this.length1 = length + 2;
+      this.width1 = width + 2;
+    }
   }
 }
 const obj1 = new Square(3, 4);
 console.log(`obj1:`, obj1);
+
+*/
+
+class Shape {
+  constructor(length, width) {
+    console.dir(new.target);
+    if (new.target !== undefined) {
+      this.length = length;
+      this.width = width;
+      if (new.target === Shape) {
+        throw new Error('本类不能实例化');
+      }
+    }
+  }
+}
+
+class Rectangle extends Shape {
+  constructor(length, width) {
+    if (new.target !== undefined) {
+      super(length, width);
+    }
+  }
+}
+const y = new Rectangle(3, 4); // 正确
+console.log(`y:`, y);
+const x = new Shape();  // 报错
+
+// 上面代码中, Shape类, 只能用于继承, 不能被实例化
