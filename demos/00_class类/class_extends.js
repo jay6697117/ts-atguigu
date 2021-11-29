@@ -382,6 +382,7 @@ class B extends A {
 let b = new B();
 */
 
+/*
 // 由于对象总是继承其他对象的，所以可以在任意一个对象中，使用super关键字
 class A {}
 class B extends A {
@@ -397,4 +398,8 @@ obj = {
   }
 };
 console.log(`obj.toString() :`, obj.toString());
-console.log(`obj.toString() === obj :`, obj.toString() === obj)
+console.log(`obj.toString() === obj :`, obj.toString() === obj);
+*/
+
+
+// 类的 prototype 属性和__proto__属性
