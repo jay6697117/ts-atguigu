@@ -308,6 +308,7 @@ child.myMethod(2); // instance 2  ||  Parent.prototype.myMethod.call(child, msg)
 
 */
 
+/*
 // 在子类的静态方法中通过super调用父类的方法时，方法内部的this指向当前的子类，而不是子类的实例
 class A {
   constructor() {
@@ -340,3 +341,60 @@ B.m(); //undefined
 console.log('---------');
 B.x = 3;
 B.m(); // 3
+
+// 上面代码中，静态方法B.m里面，super.print指向父类的静态方法。这个方法里面的this指向的是B，而不是B的实例
+*/
+
+/*
+// 注意，使用super的时候，必须显式指定是作为函数、还是作为对象使用，否则会报错
+class A {
+  constructor() {
+    this.baz = 111;
+  }
+  foo(){
+    console.log('foo')
+  }
+}
+
+class B extends A {
+  constructor() {
+    super();
+    console.log(`super.foo:`, super.foo); // 必须显式指定是作为函数、还是作为对象使用，否则会报错
+  }
+}
+
+console.log(new A())
+console.log('-----------')
+console.log(new B())
+*/
+
+/*
+class A {}
+class B extends A {
+  constructor() {
+    super();
+    // super.valueOf()表明super是一个对象
+    console.log(super.valueOf()); //由于super使得this指向B的实例，所以super.valueOf()返回的是一个B的实例
+    console.log(`super.valueOf() === this :`, super.valueOf() === this); //true
+    console.log(super.valueOf() instanceof B); // true
+  }
+}
+let b = new B();
+*/
+
+// 由于对象总是继承其他对象的，所以可以在任意一个对象中，使用super关键字
+class A {}
+class B extends A {
+  constructor() {
+    super();
+    console.log(`super.valueOf() === this :`, super.valueOf() === this);//super.valueOf() === this
+  }
+}
+let obj = new B();
+obj = {
+  toString() {
+    return super.valueOf()
+  }
+};
+console.log(`obj.toString() :`, obj.toString());
+console.log(`obj.toString() === obj :`, obj.toString() === obj)
