@@ -403,3 +403,4 @@ console.log(`obj.toString() === obj :`, obj.toString() === obj);
 
 
 // 类的 prototype 属性和__proto__属性
+// https://wangdoc.com/es6/class-extends.html#%E7%B1%BB%E7%9A%84-prototype-%E5%B1%9E%E6%80%A7%E5%92%8C__proto__%E5%B1%9E%E6%80%A7
