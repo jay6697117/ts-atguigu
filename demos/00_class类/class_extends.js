@@ -401,10 +401,8 @@ console.log(`obj.toString() :`, obj.toString());
 console.log(`obj.toString() === obj :`, obj.toString() === obj);
 */
 
-
 // 类的 prototype 属性和__proto__属性
 // https://wangdoc.com/es6/class-extends.html#%E7%B1%BB%E7%9A%84-prototype-%E5%B1%9E%E6%80%A7%E5%92%8C__proto__%E5%B1%9E%E6%80%A7
-
 
 /*
 class A {
@@ -417,7 +415,6 @@ B.__proto__ === A // true B类父亲是A类
 B.prototype.__proto__ === A.prototype // true B类原型对象的父亲是A类的原型对象
 */
 
-
 /*
 class A {}
 class B {}
@@ -428,7 +425,6 @@ Object.setPrototypeOf(B, A);
 const b = new B();
 console.log(`b:`, b);
 */
-
 
 /*
 const setPrototypeOfFn = function (obj, proto) {
@@ -455,7 +451,6 @@ console.log(D.prototype.__proto__ === C.prototype)
 console.log(D.__proto__ === C)
 */
 
-
 /*
 const person = {
   isHuman: false,
@@ -476,20 +471,17 @@ me.printIntroduction();
 // expected output: "My name is Matthew. Am I human? true"
 */
 
-
 /*
 B.prototype = Object.create(A.prototype);
 // 等同于
 B.prototype.__proto__ = A.prototype;
 */
 
-
 /*
 class A extends Object {}
 console.log(A.__proto__ === Object);
 console.log(A.prototype.__proto__ === Object.prototype);
 */
-
 
 /*
 class A {}
@@ -498,7 +490,6 @@ console.log(B.__proto__ === A);
 console.log(B.prototype.__proto__ === A.prototype);
 */
 
-
 /*
 class A {}
 console.dir(A);
@@ -506,3 +497,41 @@ A.__proto__ === Function.prototype; // true
 A.prototype.__proto__ === Object.prototype; // true
 // 这种情况下，A作为一个基类（即不存在任何继承），就是一个普通函数，所以直接继承Function.prototype。但是，A调用后返回一个空对象（即Object实例），所以A.prototype.__proto__指向构造函数（Object）的prototype属性
 */
+
+
+/*
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  printName() {
+    console.log('hahaha');
+  }
+}
+
+class ColorPoint extends Point {
+  constructor(x, y, z) {
+    super(x, y);
+    this.color = z;
+  }
+}
+
+const p1 = new Point(2, 3);
+const p2 = new ColorPoint(2, 3, 'red');
+
+console.log(Point.prototype);
+Point.prototype.printName();
+
+//子类修改父类原型对象的方法 printName
+p2.__proto__.__proto__.printName = function () {
+  console.log('hello world hahaha');
+};
+
+//父类原型对象的方法 printName 改变了
+console.log(Point.prototype);
+Point.prototype.printName();
+*/
+
+// 原生构造函数的继承
+// https://wangdoc.com/es6/class-extends.html#%E5%8E%9F%E7%94%9F%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E7%BB%A7%E6%89%BF
