@@ -404,3 +404,105 @@ console.log(`obj.toString() === obj :`, obj.toString() === obj);
 
 // 类的 prototype 属性和__proto__属性
 // https://wangdoc.com/es6/class-extends.html#%E7%B1%BB%E7%9A%84-prototype-%E5%B1%9E%E6%80%A7%E5%92%8C__proto__%E5%B1%9E%E6%80%A7
+
+
+/*
+class A {
+}
+
+class B extends A {
+}
+
+B.__proto__ === A // true B类父亲是A类
+B.prototype.__proto__ === A.prototype // true B类原型对象的父亲是A类的原型对象
+*/
+
+
+/*
+class A {}
+class B {}
+// B 的实例继承 A 的实例
+Object.setPrototypeOf(B.prototype, A.prototype);
+// B 继承 A 的静态属性
+Object.setPrototypeOf(B, A);
+const b = new B();
+console.log(`b:`, b);
+*/
+
+
+/*
+const setPrototypeOfFn = function (obj, proto) {
+  obj.__proto__  = proto;
+  return obj;
+};
+// Object.setPrototypeOf = setPrototypeOfFn;
+class A {}
+class B {}
+class C {}
+class D {}
+setPrototypeOfFn(B.prototype, A.prototype);
+setPrototypeOfFn(B, A);
+Object.setPrototypeOf(D.prototype, C.prototype);
+Object.setPrototypeOf(D, C);
+const b = new B();
+console.log(`b:`, b);
+console.log(B.prototype.__proto__ === A.prototype)
+console.log(B.__proto__ === A)
+console.log('-------------------------')
+const d = new D();
+console.log(`d:`, d);
+console.log(D.prototype.__proto__ === C.prototype)
+console.log(D.__proto__ === C)
+*/
+
+
+/*
+const person = {
+  isHuman: false,
+  printIntroduction: function() {
+    console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+  }
+};
+
+const me = Object.create(person);
+console.log(`me 000:`, me)
+console.log(me.__proto__ === person)
+
+me.name = 'Matthew'; // "name" is a property set on "me", but not on "person"
+me.isHuman = true; // inherited properties can be overwritten
+console.log(`me 001:`, me);
+
+me.printIntroduction();
+// expected output: "My name is Matthew. Am I human? true"
+*/
+
+
+/*
+B.prototype = Object.create(A.prototype);
+// 等同于
+B.prototype.__proto__ = A.prototype;
+*/
+
+
+/*
+class A extends Object {}
+console.log(A.__proto__ === Object);
+console.log(A.prototype.__proto__ === Object.prototype);
+*/
+
+
+/*
+class A {}
+class B extends A {}
+console.log(B.__proto__ === A);
+console.log(B.prototype.__proto__ === A.prototype);
+*/
+
+
+/*
+class A {}
+console.dir(A);
+A.__proto__ === Function.prototype; // true
+A.prototype.__proto__ === Object.prototype; // true
+// 这种情况下，A作为一个基类（即不存在任何继承），就是一个普通函数，所以直接继承Function.prototype。但是，A调用后返回一个空对象（即Object实例），所以A.prototype.__proto__指向构造函数（Object）的prototype属性
+*/
