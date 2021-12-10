@@ -73,6 +73,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'TS项目',
       filename: 'index.html',
+      favicon: path.resolve(rootDir, './public/favicon.ico'),
       template: path.resolve(rootDir, './public/index.html')
     })
   ],
