@@ -51,5 +51,3 @@ const per = new Person();
 
 // Person.sayHello();
 per.sayHello();
-
-
