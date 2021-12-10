@@ -1,11 +1,14 @@
 // 1.0 类（class）
 class Person {
   //实例属性(实例访问)
-  // readonly name?: string = '默认人名'; //只读属性
   name?: string = '默认人名';
+  //只读实例属性(实例访问)
+  // readonly name?: string = '默认人名';
   age?: number = 18;
   //静态属性(类访问)
   static isHuman: boolean = true;
+  //只读静态属性(类访问)
+  // static readonly isHuman: boolean = true;
   // 构造方法
   constructor(name?: string, age?: number) {
     this.name = name ? name : this.name;
@@ -23,4 +26,6 @@ console.log(`p1 000:`, p1);
 p1.name = '张金辉1';
 console.log(`p1 001:`, p1);
 console.log(`Person.prototype:`, Person.prototype);
-console.log(`Person.isHuman:`, Person.isHuman);
+console.log(`Person.isHuman 000:`, Person.isHuman);
+Person.isHuman = false;
+console.log(`Person.isHuman 001:`, Person.isHuman);
