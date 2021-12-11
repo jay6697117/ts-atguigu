@@ -6,6 +6,8 @@ const rootDir = process.cwd(); // 项目根目录
 
 console.log(`process.env.NODE_ENV:`, process.env.NODE_ENV);
 
+const isProd = ['production', 'prod'].includes(process.env.NODE_ENV);
+
 // webpack中的所有的配置信息都应该写在module.exports中
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -25,6 +27,7 @@ module.exports = {
       arrowFunction: false
     }
   },
+  devtool: isProd ? 'hidden-source-map' : 'eval-cheap-module-source-map',
   // 指定webpack打包时要使用模块
   module: {
     // 指定要加载的规则

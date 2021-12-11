@@ -14,6 +14,7 @@
     constructor(name: string, age: number) {
       super(name);
       this.age = age;
+      super.sayHello();
     }
     sayHello() {
       console.log(this.name + ' 重写 say hello!');
