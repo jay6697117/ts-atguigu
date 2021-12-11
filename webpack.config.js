@@ -27,7 +27,7 @@ module.exports = {
       arrowFunction: false
     }
   },
-  devtool: isProd ? 'hidden-source-map' : 'eval-cheap-module-source-map',
+  devtool: isProd ? false : 'eval-cheap-module-source-map',
   // 指定webpack打包时要使用模块
   module: {
     // 指定要加载的规则
