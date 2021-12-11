@@ -3,3 +3,5 @@ function foo(x: number, y: number) {
 }
 const res = foo(1, 2);
 console.log('res :>> ', res);
+
+export {};
