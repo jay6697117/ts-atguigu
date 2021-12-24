@@ -19,8 +19,4 @@
     abstract sayHello(): void;
   }
   console.log(`Animal`, Animal)
-  console.log(`Animal`, Animal)
-  console.log(`Animal`, Animal)
-  console.log(`Animal`, Animal)
-  console.log(`Animal`, Animal)
 })();

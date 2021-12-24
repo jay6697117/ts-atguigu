@@ -3,7 +3,7 @@
     isInitialized = false,
     _console = {}; // backup console obj to contain references of overridden fns.
   _options = {
-    bgColor: "rgba(0,0,0,1)",
+    bgColor: "black",
     logColor: "lightgreen",
     infoColor: "blue",
     warnColor: "orange",
@@ -37,10 +37,12 @@
     return function() {
       var el = createElement(
         "div",
-        "line-height:1.7em;min-height:1.7em;background:" +
-          (logEl.children.length % 2 ? "rgba(255,255,255,0.1)" : "") +
-          ";color:" +
-          color
+        "line-height:1.7em;min-height:1.7em;color:" +
+        color
+        // "line-height:1.7em;min-height:1.7em;background:" +
+        //   (logEl.children.length % 2 ? "rgba(255,255,255,0.1)" : "") +
+        //   ";color:" +
+        //   color
       ); // zebra lines
       var val = [].slice.call(arguments).reduce(function(prev, arg) {
         return (
