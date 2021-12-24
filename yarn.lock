@@ -3322,6 +3322,11 @@ schema-utils@^4.0.0:
     ajv-formats "^2.1.1"
     ajv-keywords "^5.0.0"
 
+screenlog@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmmirror.com/screenlog/download/screenlog-0.3.0.tgz#a23fa0b9366e76ae826e041096779acf07d127d8"
+  integrity sha1-oj+guTZudq6CbgQQlneazwfRJ9g=
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmmirror.com/select-hose/download/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"

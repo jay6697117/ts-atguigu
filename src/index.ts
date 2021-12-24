@@ -18,5 +18,9 @@
     // 抽象方法只能定义在抽象类中，子类必须对抽象方法进行重写
     abstract sayHello(): void;
   }
-  console.log(`Animal：`, Animal);
+  console.log(`Animal`, Animal)
+  console.log(`Animal`, Animal)
+  console.log(`Animal`, Animal)
+  console.log(`Animal`, Animal)
+  console.log(`Animal`, Animal)
 })();
