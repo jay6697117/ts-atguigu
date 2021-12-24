@@ -1267,6 +1267,8 @@ const a = new Animal(); // animal
 const r = new Rabbit(); // rabbit
 // console.log(`r:`, r); */
 
+// ----------------------上面的内容都是zh.javascript.info部分:进度看截图-------------------------
+
 // 25.阮一峰es6: Class 的基本语法
 // function Point(x, y) {
 //   this.x = x;
