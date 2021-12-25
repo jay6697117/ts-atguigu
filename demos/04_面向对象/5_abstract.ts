@@ -17,6 +17,9 @@
     // 抽象方法使用 abstract开头，没有方法体
     // 抽象方法只能定义在抽象类中，子类必须对抽象方法进行重写
     abstract sayHello(msg: string): void;
+    sayHello1(msg: string): void {
+      console.log(msg);
+    }
   }
   class Dog extends Animal {
     sayHello(msg: string) {
@@ -29,9 +32,11 @@
       console.log(`${this.name}: ${msg}`);
     }
   }
+
   const dog = new Dog('旺财');
   console.log(`dog:`, dog);
   dog.sayHello('汪汪汪111...');
+
   const cat = new Cat('加菲');
   console.log(`cat`, cat);
   cat.sayHello('喵喵喵222...');
