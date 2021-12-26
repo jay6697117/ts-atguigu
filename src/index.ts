@@ -91,11 +91,11 @@
   // }
 
   class A {
-    // protected _age: number;
-    // constructor(_age: number) {
-    //   this._age = _age;
-    // }
-    constructor(protected _age: number) {}
+    protected _age: number;
+    constructor(_age: number) {
+      this._age = _age;
+    }
+    // constructor(protected _age: number) {}
     printAge1() {
       console.log(`printAge1:`, this._age);
     }
@@ -116,4 +116,21 @@
   console.log(`b`, b);
   // console.log(`b._age:`, b._age);
   b.printAge2();
+
+  console.log('---------------------------------------------');
+
+  class C {
+    //1.传统
+    // public name: string;
+    // public age: number;
+    // constructor( name: string,  age: number) {
+    //   this.name = name;
+    //   this.age = age;
+    // }
+     //2.新语法
+    constructor(public name: string, public age: number) {}
+  }
+
+  const c = new C('张金辉', 11);
+  console.log(`c:`, c);
 })();
