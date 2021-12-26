@@ -1,5 +1,5 @@
 (function () {
-  // 描述一个对象的类型
+  // 类型别名:描述一个对象的类型
   type myType = {
     name: string,
     age: number

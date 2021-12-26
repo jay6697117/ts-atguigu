@@ -1,3 +1,3 @@
 (function () {
-console.log('泛型')
+  console.log('111111');
 })();
