@@ -12,6 +12,7 @@
     "target": "ES2015",
     "module": "ES2015",
     // 所有严格检查的总开关
-    "strict": true
+    "strict": true,
+    "noEmitOnError": true
   }
 }
