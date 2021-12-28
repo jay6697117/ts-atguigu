@@ -1,4 +1,23 @@
-const { promisify } = require('util');
+// const { promisify } = require('util');
+// console.log(`promisify 1:\n`, promisify);
+
+function promisify(f) {
+  return function (...args) { // 返回一个包装函数（wrapper-function） (*)
+    return new Promise((resolve, reject) => {
+      function callback(err, result) { // 我们对 f 的自定义的回调 (**)
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      }
+
+      args.push(callback); // 将我们的自定义的回调附加到 f 参数（arguments）的末尾
+
+      f.call(this, ...args); // 调用原始的函数
+    });
+  };
+}
 
 let testCallback = {
   value: 'testCallbackValue',
@@ -12,7 +31,7 @@ let testCallback = {
 
 (async () => {
   // num=2，不传入callback参数，callback会自动作为回调函数处理
-  console.log(`promisify(testCallback.echo):`, promisify(testCallback.echo));
+  console.log(`promisify(testCallback.echo):\n`, promisify(testCallback.echo));
   const p1 = promisify(testCallback.echo).call(testCallback, 2);
   console.log(`p1 000:`, p1);
   let val = await promisify(testCallback.echo).call(testCallback, 2);
