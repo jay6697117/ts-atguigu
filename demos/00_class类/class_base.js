@@ -38,24 +38,38 @@ class MyClass {
 
 // 2.实例化一个对象
 
-/*
+function User0(name, age) {
+  this.name = name;
+  this.age = age;
+  this.sayHi0 = function () {
+    alert(`我的name: ${this.name}`);
+  };
+}
 
-class User {
+User0.prototype.sayHi00 = function () {
+  alert(`我的name: ${this.name}`);
+};
+
+const user0 = new User0('张金辉0', 00);
+console.log(`user0:`, user0);
+
+class User1 {
   constructor(name, age) {
     this.name = name;
     this.age = age;
+    this.sayHi1 = function () {
+      alert(`我的name: ${this.name}`);
+    };
   }
 
-  sayHi() {
+  sayHi11() {
     alert(`我的name: ${this.name}`);
   }
 }
 
-const user = new User('张金辉', 31);
-console.log(`user:`, user);
-user.sayHi();
-
-*/
+const user1 = new User1('张金辉1', 11);
+console.log(`user1:`, user1);
+// user.sayHi();
 
 /**
  * 注解:
@@ -2360,7 +2374,6 @@ const obj1 = new Square(3, 4);
 console.log(`obj1:`, obj1);
 
 */
-
 
 /*
 class Shape {
