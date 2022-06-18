@@ -41,24 +41,26 @@ class MyClass {
 function User0(name, age) {
   this.name = name;
   this.age = age;
-  this.sayHi0 = function () {
-    alert(`我的name: ${this.name}`);
+  this.sayHi0 = () => {
+    console.log('this 0:', this);
   };
 }
-
 User0.prototype.sayHi00 = function () {
   alert(`我的name: ${this.name}`);
 };
 
 const user0 = new User0('张金辉0', 00);
 console.log(`user0:`, user0);
+user0.sayHi0();
+
+console.log('------------------------------------');
 
 class User1 {
   constructor(name, age) {
     this.name = name;
     this.age = age;
-    this.sayHi1 = function () {
-      alert(`我的name: ${this.name}`);
+    this.sayHi1 = () => {
+      console.log('this 1:', this);
     };
   }
 
@@ -69,7 +71,7 @@ class User1 {
 
 const user1 = new User1('张金辉1', 11);
 console.log(`user1:`, user1);
-// user.sayHi();
+user1.sayHi1();
 
 /**
  * 注解:
