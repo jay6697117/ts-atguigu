@@ -56,12 +56,17 @@ user0.sayHi0();
 console.log('------------------------------------');
 
 class User1 {
+  name = 1;
+  age = 2;
+  sayHi1 = () => {
+    console.log('this 1:', this);
+  };
   constructor(name, age) {
-    this.name = name;
-    this.age = age;
-    this.sayHi1 = () => {
-      console.log('this 1:', this);
-    };
+    // this.name = name;
+    // this.age = age;
+    // this.sayHi1 = () => {
+    //   console.log('this 1:', this);
+    // };
   }
 
   sayHi11() {
